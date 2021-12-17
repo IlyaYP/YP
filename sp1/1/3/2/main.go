@@ -15,7 +15,7 @@ import (
 
 const (
 	waitDur    = 1 * time.Second
-	cancelDur  = 2000 * time.Millisecond
+	cancelDur  = 250 * time.Millisecond
 	timeoutDur = 500 * time.Millisecond
 )
 
