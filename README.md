@@ -1,2 +1,2 @@
-# YP
-Yandex Praktikum GO developer course
+# Yandex Praktikum GO developer course
+exercises and homework, etc.
