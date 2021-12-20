@@ -37,7 +37,7 @@ func TestFullName(t *testing.T) {
 	for _, tt := range tests { // цикл по всем тестам
         t.Run(tt.name, func(t *testing.T) {
             if val := tt.value.FullName(); val != tt.want {
-                t.Errorf("Abs expected to be %v; got %v", tt.want, val)
+                t.Errorf("FullName expected to be %v; got %v", tt.want, val)
             }
         })
     }
