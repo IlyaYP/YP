@@ -6,6 +6,7 @@
 package main
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -46,14 +47,19 @@ func TestAbs(t *testing.T) {
         },
     }
 
-	for _, tt := range tests { // цикл по всем тестам
+	// for _, tt := range tests { // цикл по всем тестам
+    //     t.Run(tt.name, func(t *testing.T) {
+    //         if val := Abs(tt.value); val != tt.want {
+    //             t.Errorf("Abs expected to be %v; got %v", tt.want, val)
+    //         }
+    //     })
+    // }
+
+    for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
-            if val := Abs(tt.value); val != tt.want {
-                t.Errorf("Abs expected to be %v; got %v", tt.want, val)
-            }
+            v := Abs(tt.value)
+            assert.Equal(t, tt.want, v) // меняем на функцию Equal из пакета assert
         })
     }
-
-
 
 }
