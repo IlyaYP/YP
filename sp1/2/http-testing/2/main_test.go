@@ -5,6 +5,7 @@
 package main
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -34,13 +35,19 @@ func TestFullName(t *testing.T) {
 	}
 
 
+	// for _, tt := range tests { // цикл по всем тестам
+    //     t.Run(tt.name, func(t *testing.T) {
+    //         if val := tt.value.FullName(); val != tt.want {
+    //             t.Errorf("FullName expected to be %v; got %v", tt.want, val)
+    //         }
+    //     })
+    // }
+
 	for _, tt := range tests { // цикл по всем тестам
         t.Run(tt.name, func(t *testing.T) {
-            if val := tt.value.FullName(); val != tt.want {
-                t.Errorf("FullName expected to be %v; got %v", tt.want, val)
-            }
+            val := tt.value.FullName()
+			assert.Equal(t,tt.want, val)
         })
     }
-
 
 }

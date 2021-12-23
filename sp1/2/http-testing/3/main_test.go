@@ -7,6 +7,8 @@
 package main
 
 import (
+	"github.com/stretchr/testify/assert"
+    "github.com/stretchr/testify/require"
 	"testing"
 )
 
@@ -16,7 +18,7 @@ func TestAddNew(t *testing.T) {
         name   string
         p Person
 		r Relationship
-        want error
+        want bool //error
     }{
         {
             name:   "simple test #1", // описывается каждый тест
@@ -27,7 +29,7 @@ func TestAddNew(t *testing.T) {
 				Age: 56,
 			},      // значения, которые будет принимать функция
 			r: Father,
-            want:   nil,                // ожидаемое значение
+            want:   false, //nil,                // ожидаемое значение
         },
         {
             name:   "simple test #2", // описывается каждый тест
@@ -37,15 +39,30 @@ func TestAddNew(t *testing.T) {
 				Age: 57,
 			},      // значения, которые будет принимать функция
 			r: Father,
-            want:   ErrRelationshipAlreadyExists,                // ожидаемое значение
+            want:   true, //ErrRelationshipAlreadyExists,                // ожидаемое значение
         },
 	}
 
+	// for _, tt := range tests { // цикл по всем тестам
+    //     t.Run(tt.name, func(t *testing.T) {
+    //         if val := f.AddNew(tt.r, tt.p) ; val != tt.want {
+    //             t.Errorf("AddNew expected to be %v; got %v", tt.want, val)
+    //         }
+    //     })
+    // }
+
 	for _, tt := range tests { // цикл по всем тестам
         t.Run(tt.name, func(t *testing.T) {
-            if val := f.AddNew(tt.r, tt.p) ; val != tt.want {
-                t.Errorf("AddNew expected to be %v; got %v", tt.want, val)
+            err := f.AddNew(tt.r, tt.p)
+            if !tt.want {
+                // обязательно проверяем на ошибки
+                require.NoError(t, err)
+                // дополнительно проверяем, что новый человек был добавлен
+                assert.Contains(t, f.Members, tt.r)
+                return
             }
+
+			assert.Error(t, err)
         })
     }
 
