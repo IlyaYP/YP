@@ -1,3 +1,4 @@
+// Testing maps
 package main
 
 import (
@@ -66,6 +67,23 @@ func main() {
 	counter.Lock()
 	counter.m["some_key"]++
 	counter.Unlock()
+
+	var mtr1 = struct {
+		sync.RWMutex
+		mtr map[string]map[string]string
+	}{mtr: make(map[string]map[string]string)}
+	mtr1.mtr["counter"] = make(map[string]string)
+	mtr1.mtr["counter"]["PollCount"] = "1"
+	mtr1.mtr["counter"]["PollCount1"] = "1"
+	mtr1.mtr["gauge"] = make(map[string]string)
+	mtr1.mtr["gauge"]["Alloc"] = "123456"
+	fmt.Println(mtr1.mtr)
+
+	v, ok := mtr1.mtr["counter"]
+	fmt.Println(v, ok)
+	// if _, ok := mtr1.mtr["gauge"]; ok{
+	// 	fmt.Println(mtr1.mtr)
+	// }
 }
 func add(m map[string]map[string]int, path, country string) {
 	mm, ok := m[path]
