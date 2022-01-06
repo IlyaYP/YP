@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/pelletier/go-toml"
 	"gopkg.in/yaml.v2"
 )
 
@@ -40,9 +41,9 @@ func main() {
 	}
 	fmt.Printf("--- t:\n%v\n\n", t)
 
-	// out, err := yaml.Marshal(balance)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println(string(out))
+	out, err := toml.Marshal(t)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+	fmt.Println(string(out))
 }
