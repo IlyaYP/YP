@@ -40,7 +40,7 @@ func NewProducer(filename string) (*producer, error) {
 func (p *producer) WriteEvent(event *Event) error {
 	// допишите код здесь
 
-	return p.encoder.Encode(event)
+	return p.encoder.Encode(&event)
 }
 
 func (p *producer) Close() error {
