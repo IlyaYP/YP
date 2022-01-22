@@ -4,6 +4,7 @@ import (
 	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 )
 
@@ -35,5 +36,6 @@ func main() {
 	h.Write(src)
 	dst := h.Sum(nil)
 
-	fmt.Printf("%x", dst)
+	fmt.Printf("%x\n", dst)
+	fmt.Println(hex.EncodeToString(dst))
 }
